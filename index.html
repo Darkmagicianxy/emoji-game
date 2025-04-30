@@ -7,8 +7,8 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #333;
+      background: #eafaf1; /* light green */
+      color: #155724; /* deep green text */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,6 +20,7 @@
     h1 {
       font-size: 2.2rem;
       margin-bottom: 1rem;
+      color: #6a1b9a; /* purple */
     }
 
     #emojis {
@@ -34,15 +35,16 @@
       margin: 8px;
       border: none;
       border-radius: 6px;
-      background-color: #007bff;
+      background: linear-gradient(to right, #4CAF50, #9c27b0); /* green to purple gradient */
       color: white;
       text-decoration: none;
       cursor: pointer;
       display: inline-block;
+      transition: background 0.3s ease;
     }
 
     button:hover, a.share-btn:hover {
-      background-color: #0056b3;
+      background: linear-gradient(to right, #388e3c, #7b1fa2); /* darker gradient on hover */
     }
 
     .share-buttons {
@@ -64,7 +66,7 @@
     <a class="share-btn" id="telegram" target="_blank">Telegram</a>
     <a class="share-btn" id="snapchat" target="_blank">Snapchat</a>
     <button onclick="copyEmojis()">Copy Emojis</button>
-    <button onclick="downloadImage()">Download Emojis as Image</button>
+    <button onclick="downloadImage()">Download as Image</button>
   </div>
 
   <script>
@@ -83,8 +85,6 @@
       document.getElementById("emojis").innerText = emojiStr;
 
       const shareText = encodeURIComponent(`🎮 Try this fun emoji game! 😄\n${emojiStr}\n👉 https://darkmagicianxy.github.io/emoji-game/`);
-
-      // Update all share links with emojis
       document.getElementById("whatsapp").href = `https://wa.me/?text=${shareText}`;
       document.getElementById("telegram").href = `https://t.me/share/url?url=https://darkmagicianxy.github.io/emoji-game/&text=${shareText}`;
       document.getElementById("snapchat").href = `https://www.snapchat.com/scan?attachmentUrl=https://darkmagicianxy.github.io/emoji-game/`;
@@ -103,17 +103,17 @@
       const emojis = document.getElementById("emojis").innerText;
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      
-      canvas.width = 500; // Set canvas width
-      canvas.height = 150; // Set canvas height
-      ctx.font = "36px Arial";
-      ctx.fillText(emojis, 10, 50); // Write emojis to the canvas
 
-      const dataUrl = canvas.toDataURL("image/png"); // Convert canvas to image
+      canvas.width = 500;
+      canvas.height = 150;
+      ctx.font = "36px Arial";
+      ctx.fillText(emojis, 10, 50);
+
+      const dataUrl = canvas.toDataURL("image/png");
 
       const link = document.createElement("a");
       link.href = dataUrl;
-      link.download = "emoji_game.png"; // Download as PNG image
+      link.download = "emoji_game.png";
       link.click();
     }
   </script>
