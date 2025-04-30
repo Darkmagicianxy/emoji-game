@@ -70,4 +70,52 @@
   <script>
     const emojiList = Array.from({ length: 0x1FAF0 - 0x1F300 }, (_, i) => {
       const emoji = String.fromCodePoint(0x1F300 + i);
-      retur
+      return /\p{Emoji}/u.test(emoji) ? emoji : null;
+    }).filter(Boolean);
+
+    function generateEmojis() {
+      let result = [];
+      while (result.length < 10) {
+        const random = emojiList[Math.floor(Math.random() * emojiList.length)];
+        if (!result.includes(random)) result.push(random);
+      }
+      const emojiStr = result.join(" ");
+      document.getElementById("emojis").innerText = emojiStr;
+
+      const shareText = encodeURIComponent(`🎮 Try this fun emoji game! 😄\n${emojiStr}\n👉 https://darkmagicianxy.github.io/emoji-game/`);
+
+      // Update all share links with emojis
+      document.getElementById("whatsapp").href = `https://wa.me/?text=${shareText}`;
+      document.getElementById("telegram").href = `https://t.me/share/url?url=https://darkmagicianxy.github.io/emoji-game/&text=${shareText}`;
+      document.getElementById("snapchat").href = `https://www.snapchat.com/scan?attachmentUrl=https://darkmagicianxy.github.io/emoji-game/`;
+    }
+
+    function copyEmojis() {
+      const emojis = document.getElementById("emojis").innerText;
+      navigator.clipboard.writeText(emojis).then(() => {
+        alert("Emojis copied to clipboard! 😎");
+      }).catch((err) => {
+        alert("Failed to copy emojis: " + err);
+      });
+    }
+
+    function downloadImage() {
+      const emojis = document.getElementById("emojis").innerText;
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      
+      canvas.width = 500; // Set canvas width
+      canvas.height = 150; // Set canvas height
+      ctx.font = "36px Arial";
+      ctx.fillText(emojis, 10, 50); // Write emojis to the canvas
+
+      const dataUrl = canvas.toDataURL("image/png"); // Convert canvas to image
+
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = "emoji_game.png"; // Download as PNG image
+      link.click();
+    }
+  </script>
+</body>
+</html>
