@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emoji Game 🎲</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #fefae0;
+    }
+    h1 {
+      font-size: 2em;
+      color: #333;
+    }
+    #emoji-box {
+      font-size: 2.5em;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffb703;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fb8500;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎲 Emoji Game!</h1>
+  <p>Click to get 10 random emojis and send them to a friend!</p>
+
+  <div id="emoji-box">😄🎯🍕🎸🌟</div>
+
+  <button onclick="generateEmojis()">Generate Emojis</button>
+  <button onclick="copyEmojis()">Copy & Share</button>
+
+  <script>
+    const emojiList = [
+       "😀", "😁", "😂", "😃", "😄", "😅", "😆", "😇", "😈", "😉",
+  "😊", "😋", "😌", "😍", "😎", "😏", "😐", "😑", "😒", "😓",
+  "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝",
+  "😞", "😟", "😠", "😡", "😢", "😣", "😤", "😥", "😦", "😧",
+  "😨", "😩", "😪", "😫", "😬", "😭", "😮", "😯", "😰", "😱",
+  // More emojis
+  "🌈", "🔥", "🌟", "🎉", "💥", "💡", "⚡", "🌟", "✨", "🌙",
+  "🌜", "🌛", "🌞", "🌝", "🌚", "🌌", "🪐", "🌍", "🌎", "🌏",
+  "🍏", "🍎", "🍐", "🍑", "🍒", "🍓", "🍋", "🍊", "🍉", "🍇",
+  "🍍", "🍌", "🍒", "🍓", "🍋", "🍉", "🍓", "🍌", "🍏", "🍆",
+  "🥦", "🥬", "🌽", "🍞", "🥖", "🍕", "🍔", "🌭", "🍟", "🍿",
+  // Continue adding more emojis like this...
+  "🐶", "🐱", "🐭", "🐹", "🐰", "🐻", "🐼", "🐨", "🐯", "🐸",
+  "🐷", "🐽", "🐵", "🦊", "🦝", "🐯", "🦁", "🐮", "🐷", "🐻",
+  // Animal Emojis, faces, etc.
+  "❤️", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔", "❣️"
+    ];
+
+    function generateEmojis() {
+      let output = '';
+      let used = new Set();
+      while (used.size < 10) {
+        let index = Math.floor(Math.random() * emojiList.length);
+        if (!used.has(index)) {
+          used.add(index);
+          output += emojiList[index] + ' ';
+        }
+      }
+      document.getElementById('emoji-box').textContent = output.trim();
+    }
+
+    function copyEmojis() {
+      const emojis = document.getElementById('emoji-box').textContent;
+      navigator.clipboard.writeText(emojis).then(() => {
+        alert("Emojis copied! Paste them into a message 😄");
+      });
+    }
+
+    // Generate on load
+    generateEmojis();
+  </script>
+
+</body>
+</html>
