@@ -63,39 +63,11 @@
     <a class="share-btn" id="whatsapp" target="_blank">WhatsApp</a>
     <a class="share-btn" id="telegram" target="_blank">Telegram</a>
     <a class="share-btn" id="snapchat" target="_blank">Snapchat</a>
-    <button onclick="copyLink()">Copy Link</button>
+    <button onclick="copyEmojis()">Copy Emojis</button>
+    <button onclick="downloadImage()">Download Emojis as Image</button>
   </div>
 
   <script>
-    // Use Unicode Emoji Range U+1F300 to U+1FAFF (filtered for displayable emojis)
     const emojiList = Array.from({ length: 0x1FAF0 - 0x1F300 }, (_, i) => {
       const emoji = String.fromCodePoint(0x1F300 + i);
-      return /\p{Emoji}/u.test(emoji) ? emoji : null;
-    }).filter(Boolean);
-
-    function generateEmojis() {
-      let result = [];
-      while (result.length < 10) {
-        const random = emojiList[Math.floor(Math.random() * emojiList.length)];
-        if (!result.includes(random)) result.push(random);
-      }
-      const emojiStr = result.join(" ");
-      document.getElementById("emojis").innerText = emojiStr;
-
-      const shareText = encodeURIComponent(`🎮 Try this fun emoji game! 😄\n${emojiStr}\n👉 https://darkmagicianxy.github.io/emoji-game/`);
-
-      // Update all share links with emojis
-      document.getElementById("whatsapp").href = `https://wa.me/?text=${shareText}`;
-      document.getElementById("telegram").href = `https://t.me/share/url?url=https://darkmagicianxy.github.io/emoji-game/&text=${shareText}`;
-      document.getElementById("snapchat").href = `https://www.snapchat.com/scan?attachmentUrl=https://darkmagicianxy.github.io/emoji-game/`;
-    }
-
-    function copyLink() {
-      const link = "https://darkmagicianxy.github.io/emoji-game/";
-      navigator.clipboard.writeText(link).then(() => {
-        alert("Link copied to clipboard!");
-      });
-    }
-  </script>
-</body>
-</html>
+      retur
